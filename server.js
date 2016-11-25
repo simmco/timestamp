@@ -1,7 +1,12 @@
 var express = require('express');
 var moment = require('moment');
+var path = require('path');
+
 var app = express();
 
+const port = process.env.PORT || 3000;
+
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.get('/:time', function(req, res) {
     var dateReq = req.params.time;
@@ -29,8 +34,8 @@ app.get('/:time', function(req, res) {
     res.send(api);
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+app.listen(port, () => {
+  console.log(`Started on port ${port}`);
 });
 
 function toUnix (date) {
